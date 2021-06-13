@@ -98,7 +98,9 @@ while cap.isOpened():
         cv2.circle(frame,exPrevision[i][0], radius=3, color=(255, 255, 255), thickness=6)  #Center
         cv2.circle(frame,exPrevision[i][1], radius=5, color=(0, 0, 0), thickness=6)  #Pline
         cv2.line(frame, exPrevision[i][0],exPrevision[i][1], (0, 0xFF, 0), 5)  #Center-Pline
-        cv2.line(frame, exPrevision[i][1],exPrevision[i][2], (0, 0xFF, 0xFF), 5)  #Pline-DataCenter
+        cv2.line(frame, exPrevision[i][1],exPrevision[i][2], (0, 0xFF, 0xFF), 5)  #Pline-DataCente
+        #input("stop")
+        
 
 
     #draw result of tracking

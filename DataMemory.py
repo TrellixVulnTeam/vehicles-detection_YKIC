@@ -20,16 +20,14 @@ from numpy import linalg as LA
 # [center] -> [center, prev_center]
 # contains center of actual prediction and previous. 
 #  
-# [velocity] -> [velocity, previous_velocity, average_velocity, acceleration]
+# [velocity] -> [velocity, previous_velocity, average_velocity, deltaD]
 # contains actual velocity, load like actual position-previous_position / Time_actual - Time_previous ,
-# previous velocity, mean velocity load like weighted average of all velocity, acceleration load like actual position - previous position 
+# previous velocity, mean velocity load like average of all velocity, deltaD load like actual position - previous position 
 #
 #  [boxes] -> [boxes]
 # contains boxe 
 # [iteration] -> [num_of_iteration]
 # contains number of iteration of that object, how many frame detect it
-
-
 
 
 #add object to dataMemory
@@ -61,7 +59,7 @@ def UpdateData(DataLevel,counter,center,boxe):
 
     DataLevel[4][0] = dist/time
 
-    #save actual acceleration
+    #save actual deltaD
     Ax=DataLevel[3][0][0] -  DataLevel[3][1][0]
     Ay=DataLevel[3][0][1] -  DataLevel[3][1][1]
     DataLevel[4][3]=(Ax,Ay)
@@ -69,7 +67,7 @@ def UpdateData(DataLevel,counter,center,boxe):
     #increase the counter of iterations made, I need it to calculate the weighted average of the speed
     DataLevel[6][0]= DataLevel[6][0]+1          
     
-    #calculate the average speed as a weighted average of past speeds
+    #calculate the average speed as a average of past speeds
     DataLevel[4][2]= ( ( ( DataLevel[4][2] * ( DataLevel[6][0] - 1) ) + DataLevel[4][0] )
                          / DataLevel[6][0] )
     DataLevel[4][2]=round(DataLevel[4][2], 1)
@@ -96,8 +94,14 @@ def TrackingMemory(
         for j in range(0,len(DataMemory)):  
             #load distance from center in memory and object's center
             dist = math.sqrt((DataMemory[j][3][0][0] - Center[0])**2 + (DataMemory[j][3][0][1] -Center[1])**2 )
+            tim= counter-DataMemory[j][2][0]
+            if tim==0:
+                tim=1
+
+            vel= dist / tim 
             #object need right class, small distance and last update not not older than 15 frame
-            if DataMemory[j][1][0]==Class and dist < distance and (counter-DataMemory[j][2][0]) < 15:
+            if (DataMemory[j][1][0]==Class and dist < distance and (counter-DataMemory[j][2][0]) < 15
+                    and (vel<(10*DataMemory[j][4][2]) or DataMemory[j][4][2]==0) ):
                #if i find save id
                find=True
                IdArray.append(DataMemory[j][0])
