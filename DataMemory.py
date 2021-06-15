@@ -99,7 +99,9 @@ def TrackingMemory(
                 tim=1
 
             vel= dist / tim 
-            #object need right class, small distance and last update not not older than 15 frame
+            #object need right class, small distance, last update not not older than 15 frame and velocity control
+            #velocity control comparison that actual velocity is not greater than 10*mean velocity of that,
+            # ==0 need for the first upgrade.
             if (DataMemory[j][1][0]==Class and dist < distance and (counter-DataMemory[j][2][0]) < 15
                     and (vel<(10*DataMemory[j][4][2]) or DataMemory[j][4][2]==0) ):
                #if i find save id
