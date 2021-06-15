@@ -7,3 +7,5 @@ It returns the position and the speed of it creating a history containing the da
 
 <img src="../../Resource/exampleImage/prediction.PNG" alt="Drawing" style="width: 300px;"/>
 <img src="../../Resource/exampleImage/prediction.JPG" alt="Drawing" style="width: 300px;"/>
+<img src="../../Resource/exampleImage/prediction.png" alt="Drawing" style="width: 300px;"/>
+<img src="../../Resource/exampleImage/prediction.jpg" alt="Drawing" style="width: 300px;"/>
