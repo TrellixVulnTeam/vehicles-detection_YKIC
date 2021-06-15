@@ -6,3 +6,4 @@ Taking an input video depicting a road traveled by cars, the tracking function r
 It returns the position and the speed of it creating a history containing the data of all the recognized vehicles
 
 <img src="../../Resource/exampleImage/prediction.PNG" alt="Drawing" style="width: 300px;"/>
+<img src="../../Resource/exampleImage/prediction.JPG" alt="Drawing" style="width: 300px;"/>
